@@ -57,6 +57,17 @@ function RootDocument({ children }: { children: ReactNode }) {
     <html lang={locale}>
       <head>
         <HeadContent />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MJR1MG9MYZ" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-MJR1MG9MYZ');
+            `,
+          }}
+        />
       </head>
       <body>
         <Header locale={locale} />
