@@ -1,13 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-type D1DatabaseLike = {
-  prepare: (query: string) => {
-    bind: (...values: Array<string | null>) => {
-      run: () => Promise<unknown>
-    }
-  }
-}
-
 type HeartbeatPayload = {
   installId?: unknown
   appVersion?: unknown
@@ -15,14 +7,12 @@ type HeartbeatPayload = {
   locale?: unknown
 }
 
+type AnalyticsEnv = Env & {
+  ANALYTICS_SALT?: string
+}
+
 type HandlerContext = {
   request?: Request
-  context?: {
-    env?: Record<string, unknown>
-    cloudflare?: {
-      env?: Record<string, unknown>
-    }
-  }
 }
 
 const jsonHeaders = {
@@ -45,9 +35,11 @@ export const Route = createFileRoute('/api/app/heartbeat')({
           const parsed = parsePayload(payload)
           if (!parsed.ok) return json({ ok: false, error: parsed.error }, 400)
 
-          const env = ctx.context?.cloudflare?.env ?? ctx.context?.env ?? getGlobalEnv()
-          const db = env.DB as D1DatabaseLike | undefined
-          const salt = typeof env.ANALYTICS_SALT === 'string' ? env.ANALYTICS_SALT : ''
+          const { env } = await import('cloudflare:workers')
+          const analyticsEnv = env as AnalyticsEnv
+          const db = analyticsEnv.DB
+          const salt =
+            typeof analyticsEnv.ANALYTICS_SALT === 'string' ? analyticsEnv.ANALYTICS_SALT : ''
 
           if (!db) return json({ ok: false, error: 'missing_d1_binding' }, 500)
           if (!salt) return json({ ok: false, error: 'missing_analytics_salt' }, 500)
@@ -161,8 +153,4 @@ async function sha256Hex(value: string) {
   return Array.from(new Uint8Array(digest))
     .map((byte) => byte.toString(16).padStart(2, '0'))
     .join('')
-}
-
-function getGlobalEnv() {
-  return globalThis as unknown as Record<string, unknown>
 }

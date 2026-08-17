@@ -2,9 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "demo-cue-site",
   "compatibility_date": "2026-08-17",
-  "main": ".output/server/index.mjs",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
   "assets": {
-    "directory": ".output/public",
     "binding": "ASSETS"
   },
   "d1_databases": [
