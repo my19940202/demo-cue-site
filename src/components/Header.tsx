@@ -1,8 +1,9 @@
 import { Link } from '@tanstack/react-router'
-import { copy, localizedPath, siteConfig, type SupportedLocale } from '../lib/i18n'
+import { copy, getDownloadUrl, localizedPath, siteConfig, type SupportedLocale } from '../lib/i18n'
 
 export default function Header({ locale }: { locale: SupportedLocale }) {
   const t = copy[locale]
+  const downloadUrl = getDownloadUrl()
 
   return (
     <header className="site-header">
@@ -24,8 +25,16 @@ export default function Header({ locale }: { locale: SupportedLocale }) {
             {t.langSwitch}
           </a>
           <a
-            className="button button-small button-primary"
+            className="button button-small"
             href={siteConfig.downloadUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t.githubDownload}
+          </a>
+          <a
+            className="button button-small button-primary"
+            href={downloadUrl}
             target="_blank"
             rel="noreferrer"
           >

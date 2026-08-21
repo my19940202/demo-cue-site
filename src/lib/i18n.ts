@@ -6,6 +6,10 @@ export const siteConfig = {
   name: 'DemoCue',
   url: 'https://democue.aizeten.me',
   downloadUrl: 'https://github.com/my19940202/record-float-bar/releases',
+  downloadUrls: {
+    macos: 'https://6368-chengduzhubai-7gfjf95z068b991b-1352445637.tcb.qcloud.la/democue/DemoCue_0.1.0_aarch64.dmg',
+    windows: 'https://6368-chengduzhubai-7gfjf95z068b991b-1352445637.tcb.qcloud.la/democue/DemoCue_0.1.0_x64-setup.exe',
+  },
   xiaohongshuUrl: 'https://www.xiaohongshu.com/user/profile/5ab3c72711be102733af9f87',
   twitterUrl: 'https://x.com/xishengbo',
   defaultLocale: 'en' satisfies SupportedLocale,
@@ -26,20 +30,40 @@ export function localizedPath(locale: SupportedLocale, hash = ''): string {
   return `/${locale}${hash}`
 }
 
+export function getDownloadUrl(): string {
+  if (typeof navigator === 'undefined') {
+    return siteConfig.downloadUrl
+  }
+
+  const platform = `${navigator.userAgent} ${navigator.platform}`.toLowerCase()
+
+  if (platform.includes('win')) {
+    return siteConfig.downloadUrls.windows
+  }
+
+  if (platform.includes('mac')) {
+    return siteConfig.downloadUrls.macos
+  }
+
+  return siteConfig.downloadUrl
+}
+
 export const copy = {
   en: {
     navIntro: 'Intro',
     navFeatures: 'Features',
     navHow: 'How it works',
     navFaq: 'FAQ',
-    contact: 'Download from GitHub',
+    contact: 'Direct download',
+    githubDownload: 'Download from GitHub',
     langSwitch: '中文',
     langSwitchPath: '/zh',
     eyebrow: 'AI outline guide for screen recording',
     heroTitle: 'Guide every recording with a clear outline — stay on track from start to finish.',
     heroDescription:
       'DemoCue turns a topic into a structured outline and keeps it visible in a lightweight floating cue bar, guiding you through each chapter while you record or screen-share live.',
-    primaryCta: 'Download from GitHub',
+    primaryCta: 'Direct download',
+    githubCta: 'Download from GitHub',
     secondaryCta: 'View features',
     socialProof:
       'Built for creators, engineers, educators, and livestream hosts who need outline-guided recording while presenting.',
@@ -83,10 +107,10 @@ export const copy = {
     showScreenshot: 'Show',
     viewScreenshotFullscreen: 'View screenshot fullscreen',
     closeFullscreen: 'Close fullscreen view',
-    installLabel: 'GitHub Releases',
+    installLabel: 'Direct download',
     installTitle: 'Download DemoCue',
     installBody:
-      'Get the latest packaged desktop build from GitHub Releases. Windows and macOS installers are available — download the one for your OS, install it, then create an outline before recording.',
+      'Download the desktop installer directly from CDN. DemoCue automatically picks the Windows or macOS package for your current system, then you can install it and create an outline before recording.',
     faqTitle: 'FAQ',
     faqs: [
       [
@@ -103,7 +127,7 @@ export const copy = {
       ],
       [
         'How do I install it?',
-        'Open GitHub Releases, download the latest desktop package for your operating system, and follow the installer prompts.',
+        'Click Direct download. DemoCue will pick the desktop package for your operating system, then follow the installer prompts.',
       ],
       [
         'What if macOS blocks the app or installation fails?',
@@ -115,7 +139,7 @@ export const copy = {
       ],
       [
         'Which platforms are supported?',
-        'Windows and macOS are both supported. Packaged builds are published on GitHub Releases; download the desktop installer for your OS.',
+        'Windows and macOS are both supported. The download button picks the matching CDN installer for your OS.',
       ],
     ],
     footer: 'Outline-guided AI cue bar for screen-recorded demos and desktop livestreams.',
@@ -127,14 +151,16 @@ export const copy = {
     navFeatures: '功能',
     navHow: '流程',
     navFaq: 'FAQ',
-    contact: '从 GitHub 下载',
+    contact: '直接下载',
+    githubDownload: '去 GitHub 下载',
     langSwitch: 'English',
     langSwitchPath: '/en',
     eyebrow: '录屏、演示、教程讲解的 AI 提纲引导',
     heroTitle: '用讲解提纲引导录屏，不再跑题、忘词、反复重录。',
     heroDescription:
       'DemoCue 把主题生成讲解提纲，并在录屏或电脑屏幕直播时以轻量悬浮提示条展示，用提纲一步步引导你推进每个章节，也给观众清晰的结构引导。',
-    primaryCta: '从 GitHub 下载',
+    primaryCta: '直接下载',
+    githubCta: '去 GitHub 下载',
     secondaryCta: '查看功能',
     socialProof: '适合需要提纲引导的创作者、程序员、老师、直播讲解者和独立开发者。',
     introTitle: "Hi, I'm DemoCue",
@@ -170,10 +196,10 @@ export const copy = {
     showScreenshot: '显示截图',
     viewScreenshotFullscreen: '全屏查看截图',
     closeFullscreen: '关闭全屏查看',
-    installLabel: 'GitHub Releases',
+    installLabel: '直接下载',
     installTitle: '下载 DemoCue',
     installBody:
-      '目前可以从 GitHub Releases 下载最新桌面端安装包，Windows 和 macOS 均已支持。选择对应系统的安装包，安装后创建提纲即可开始录屏或直播。',
+      '当前桌面端安装包已放在 CDN，下载按钮会根据你的系统自动选择 Windows 或 macOS 安装包。安装后创建提纲即可开始录屏或直播。',
     faqTitle: 'FAQ',
     faqs: [
       [
@@ -188,7 +214,7 @@ export const copy = {
         '可以用鼠标切换提纲吗？',
         '可以。悬浮提示条支持用鼠标切换到上一个或下一个提纲章节。',
       ],
-      ['如何安装？', '打开 GitHub Releases，下载最新版本里适合你系统的桌面安装包，然后按安装器提示完成安装。'],
+      ['如何安装？', '点击直接下载，DemoCue 会根据你的系统选择对应桌面安装包，然后按安装器提示完成安装。'],
       [
         '提示安装失败怎么办？',
         '当前 DMG 未做 Apple 签名和公证，首次打开前需要在终端执行：xattr -dr com.apple.quarantine /Applications/DemoCue.app',
@@ -199,7 +225,7 @@ export const copy = {
       ],
       [
         '支持哪些平台？',
-        '目前已支持 Windows 和 macOS。安装包通过 GitHub Releases 发布，下载对应系统的桌面安装包即可。',
+        '目前已支持 Windows 和 macOS。下载按钮会根据你的系统选择对应的 CDN 安装包。',
       ],
     ],
     footer: '用于录屏与直播的 AI 提纲引导工具。',

@@ -1,7 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { buildSeoHead } from '../../lib/seo'
-import { copy, localizedPath, parseLocale, siteConfig, type SupportedLocale } from '../../lib/i18n'
+import {
+  copy,
+  getDownloadUrl,
+  localizedPath,
+  parseLocale,
+  siteConfig,
+  type SupportedLocale,
+} from '../../lib/i18n'
 
 const mobileMediaQuery = '(max-width: 620px)'
 
@@ -36,6 +43,7 @@ function HomePage() {
   const [activePosterIndex, setActivePosterIndex] = useState(0)
   const [fullscreenOpen, setFullscreenOpen] = useState(false)
   const activePoster = t.posters[activePosterIndex] ?? t.posters[0]
+  const downloadUrl = getDownloadUrl()
 
   useEffect(() => {
     if (!fullscreenOpen) return
@@ -84,11 +92,19 @@ function HomePage() {
           <div className="cta-row">
             <a
               className="button button-primary"
-              href={siteConfig.downloadUrl}
+              href={downloadUrl}
               target="_blank"
               rel="noreferrer"
             >
               {t.primaryCta}
+            </a>
+            <a
+              className="button"
+              href={siteConfig.downloadUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t.githubCta}
             </a>
             <a className="button" href={localizedPath(locale, '#features')}>
               {t.secondaryCta}
@@ -196,7 +212,7 @@ function HomePage() {
         <p>{t.installBody}</p>
         <a
           className="button button-primary"
-          href={siteConfig.downloadUrl}
+          href={downloadUrl}
           target="_blank"
           rel="noreferrer"
         >
