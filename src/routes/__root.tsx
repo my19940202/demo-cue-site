@@ -8,6 +8,7 @@ import type { ReactNode } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { getLocaleFromPath, siteConfig } from '../lib/i18n'
+import { defaultOgImage } from '../lib/seo'
 import type { RouterContext } from '../router'
 
 import appCss from '../styles.css?url'
@@ -24,7 +25,13 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       { property: 'og:site_name', content: siteConfig.name },
       { property: 'og:title', content: siteConfig.defaultTitle },
       { property: 'og:description', content: siteConfig.defaultDescription },
+      { property: 'og:image', content: defaultOgImage },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
+      { property: 'og:image:alt', content: 'DemoCue AI cue bar for screen recording' },
       { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:image', content: defaultOgImage },
+      { name: 'twitter:image:alt', content: 'DemoCue AI cue bar for screen recording' },
     ],
     links: [
       {
