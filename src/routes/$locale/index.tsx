@@ -11,14 +11,14 @@ function isMobileViewport() {
 
 const seo: Record<SupportedLocale, { title: string; description: string }> = {
   en: {
-    title: 'DemoCue — AI Cue Bar for Screen Recording',
+    title: 'DemoCue — Outline-Guided Screen Recording',
     description:
-      'Create AI outlines and use a floating cue bar while recording product demos, tutorials, screen videos, screen-share livestreams, and presentations.',
+      'Generate recording outlines and use a floating cue bar to guide product demos, tutorials, screen videos, and desktop livestreams step by step.',
   },
   zh: {
-    title: 'DemoCue — 录屏演示的 AI 悬浮提示条',
+    title: 'DemoCue — 录屏提纲引导工具',
     description:
-      '为产品演示、录屏教程、电脑屏幕直播和技术分享生成 AI 提纲，并在桌面悬浮提示条中展示讲解线索。',
+      '生成讲解提纲，用悬浮提示条做录屏与直播引导，一步步推进每个章节，让表达始终有结构。',
   },
 }
 
@@ -153,11 +153,15 @@ function HomePage() {
       ) : null}
 
       <section className="page-shell intro-card">
-        <div>
+        <div className="intro-brand">
           <span>Hi, I'm</span>
           <strong>DemoCue</strong>
         </div>
-        <p>{t.introBody}</p>
+        <div className="intro-pain">
+          <h2>{t.introPainTitle}</h2>
+          <p>{t.introPainBody}</p>
+        </div>
+        <p className="intro-body">{t.introBody}</p>
       </section>
 
       <section id="features" className="page-shell section-block">
