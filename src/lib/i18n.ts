@@ -126,6 +126,10 @@ export const copy = {
         'Yes. The floating cue bar lets you move to the previous or next outline section with the mouse.',
       ],
       [
+        'What are the keyboard shortcuts?',
+        'Switch outline chapters with Ctrl+Alt+←/→ on Windows and Cmd+Shift+←/→ on macOS.',
+      ],
+      [
         'How do I install it?',
         'Click Direct download. DemoCue will pick the desktop package for your operating system, then follow the installer prompts.',
       ],
@@ -213,6 +217,10 @@ export const copy = {
       [
         '可以用鼠标切换提纲吗？',
         '可以。悬浮提示条支持用鼠标切换到上一个或下一个提纲章节。',
+      ],
+      [
+        '支持哪些快捷键？',
+        '切换提纲章节：Windows 使用 Ctrl+Alt+←/→，macOS 使用 Cmd+Shift+←/→。',
       ],
       ['如何安装？', '点击直接下载，DemoCue 会根据你的系统选择对应桌面安装包，然后按安装器提示完成安装。'],
       [
