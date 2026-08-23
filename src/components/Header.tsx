@@ -1,9 +1,14 @@
 import { Link } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 import { copy, getDownloadUrl, localizedPath, siteConfig, type SupportedLocale } from '../lib/i18n'
 
 export default function Header({ locale }: { locale: SupportedLocale }) {
   const t = copy[locale]
-  const downloadUrl = getDownloadUrl()
+  const [downloadUrl, setDownloadUrl] = useState(siteConfig.downloadUrl)
+
+  useEffect(() => {
+    setDownloadUrl(getDownloadUrl())
+  }, [])
 
   return (
     <header className="site-header">

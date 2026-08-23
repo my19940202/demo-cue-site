@@ -42,8 +42,12 @@ function HomePage() {
   const t = copy[locale]
   const [activePosterIndex, setActivePosterIndex] = useState(0)
   const [fullscreenOpen, setFullscreenOpen] = useState(false)
+  const [downloadUrl, setDownloadUrl] = useState(siteConfig.downloadUrl)
   const activePoster = t.posters[activePosterIndex] ?? t.posters[0]
-  const downloadUrl = getDownloadUrl()
+
+  useEffect(() => {
+    setDownloadUrl(getDownloadUrl())
+  }, [])
 
   useEffect(() => {
     if (!fullscreenOpen) return
