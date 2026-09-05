@@ -7,8 +7,8 @@ export const siteConfig = {
   url: 'https://democue.aizeten.me',
   downloadUrl: 'https://github.com/my19940202/record-float-bar/releases',
   downloadUrls: {
-    macos: 'https://6368-chengduzhubai-7gfjf95z068b991b-1352445637.tcb.qcloud.la/democue/DemoCue_0.2.0_aarch64.dmg',
-    windows: 'https://6368-chengduzhubai-7gfjf95z068b991b-1352445637.tcb.qcloud.la/democue/DemoCue_0.2.0_x64-setup.exe',
+    macos: 'https://6368-chengduzhubai-7gfjf95z068b991b-1352445637.tcb.qcloud.la/democue/DemoCue_0.2.1_aarch64.dmg',
+    windows: 'https://6368-chengduzhubai-7gfjf95z068b991b-1352445637.tcb.qcloud.la/democue/DemoCue_0.2.1_x64-setup.exe',
   },
   xiaohongshuUrl: 'https://www.xiaohongshu.com/user/profile/5ab3c72711be102733af9f87',
   twitterUrl: 'https://x.com/xishengbo',
